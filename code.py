@@ -1,13 +1,11 @@
-pip install pandas scikit-learn imbalanced-learn
 import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score, classification_report, confusion_matrix
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import GridSearchCV
 
-# Load the dataset from GitHub
+# Load the dataset
 url = 'https://github.com/Ganga-pavani/tasks/blob/main/Churn-Data.csv'
 df = pd.read_csv(url)
 
@@ -17,7 +15,6 @@ print(df.describe())
 print(df.head())
 print(df.isnull().sum())
 
-# Preprocess the Data
 # Handling missing values
 df.fillna(method='ffill', inplace=True)
 
