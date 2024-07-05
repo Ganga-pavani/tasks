@@ -2,12 +2,11 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score, classification_report, confusion_matrix
-from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import GridSearchCV
 
 # Load the dataset
-url = 'https://github.com/Ganga-pavani/tasks/blob/main/Churn-Data.csv'
-df = pd.read_csv(url)
+file_path = 'https://github.com/Ganga-pavani/tasks/blob/main/Churn-Data.csv'
+df = pd.read_csv(file_path)
 
 # Display basic information about the dataset
 print(df.info())
@@ -36,16 +35,12 @@ if 'PhoneNumber' in df.columns:
 X = df.drop('Churn', axis=1)
 y = df['Churn']
 
-# Handle Imbalanced Data using SMOTE
-smote = SMOTE()
-X_res, y_res = smote.fit_resample(X, y)
-
 # Train/Test Split
-X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
 # Model Training and Evaluation
-# Initialize the model
-model = RandomForestClassifier(random_state=42)
+# Initialize the model with class weights to handle imbalance
+model = RandomForestClassifier(random_state=42, class_weight='balanced')
 
 # Train the model
 model.fit(X_train, y_train)
