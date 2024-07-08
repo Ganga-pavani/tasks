@@ -15,7 +15,7 @@ from tensorflow.keras.layers import Dense
 
 import warnings
 warnings.filterwarnings('ignore')
-df = pd.read_csv('../input/weather-dataset-rattle-package/weatherAUS.csv')
+df = pd.read_csv('https://github.com/Ganga-pavani/tasks/blob/main/weatherAUS.csv')
 df.shape  
 df.head()
 df.dtypes
