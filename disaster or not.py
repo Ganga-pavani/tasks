@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-train_data = pd.read_csv("/kaggle/input/nlp-getting-started/train.csv")
-test_data = pd.read_csv("/kaggle/input/nlp-getting-started/test.csv")
+train_data = pd.read_csv("https://github.com/Ganga-pavani/tasks/blob/main/train.csv")
+test_data = pd.read_csv("https://github.com/Ganga-pavani/tasks/blob/main/test.csv")
 train_data.head()
 train_data.info()
 train_data = train_data.drop(columns=['keyword', 'location'])
