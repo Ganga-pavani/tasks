@@ -5,9 +5,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import mean_squared_error
 from sklearn.ensemble import RandomForestRegressor
-train_df = pd.read_csv('/mnt/data/PM_train.txt', sep=' ', header=None)
-test_df = pd.read_csv('/mnt/data/PM_test.txt', sep=' ', header=None)
-truth_df = pd.read_csv('/mnt/data/PM_truth.txt', sep=' ', header=None)
+train_df = pd.read_csv('https://github.com/Ganga-pavani/tasks/blob/main/train_FD001.txt', sep=' ', header=None)
+test_df = pd.read_csv('https://github.com/Ganga-pavani/tasks/blob/main/test_FD001.txt', sep=' ', header=None)
+truth_df = pd.read_csv('https://github.com/Ganga-pavani/tasks/blob/main/train_FD001.txt', sep=' ', header=None)
 train_df.drop([26, 27], axis=1, inplace=True)
 test_df.drop([26, 27], axis=1, inplace=True)
 truth_df.drop([1], axis=1, inplace=True)
