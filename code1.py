@@ -185,37 +185,21 @@ print("Columns with missing values:", missing_columns)
 
 missing_values_table(df, True)
 na_cols = missing_values_table(df, True)
-# TotalCharges sütununu sayısal tipe dönüştürme
 df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
-
-# TotalChargesPerMonth değişkeninin oluşturulması
 df['TotalChargesPerMonth'] = df['TotalCharges'] / df['tenure'].replace(0, np.nan)
 df['TotalChargesPerMonth'].fillna(0, inplace=True)
-
-# Tenure değişkenini gruplama
 bins = [0, 12, 24, 36, 48, 60, np.inf]
 labels = ['0-12 months', '13-24 months', '25-36 months', '37-48 months', '49-60 months', '60+ months']
 df['TenureGroup'] = pd.cut(df['tenure'], bins=bins, labels=labels, right=False)
 
-# Alınan hizmetlerin sayısını hesaplama
 service_columns = ['PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity', 'OnlineBackup', 
                    'DeviceProtection', 'TechSupport', 'StreamingTV', 'StreamingMovies']
 df['NumberOfServicesUsed'] = df[service_columns].apply(lambda x: sum(x == 'Yes'), axis=1)
-
-# MonthlyChargesPerService değişkeninin oluşturulması
 df['MonthlyChargesPerService'] = df['MonthlyCharges'] / df['NumberOfServicesUsed'].replace(0, np.nan)
 df['MonthlyChargesPerService'].fillna(0, inplace=True)
-
-# SeniorCitizenBinary değişkeninin oluşturulması
 df['SeniorCitizenBinary'] = df['SeniorCitizen'].apply(lambda x: 'Yes' if x == 1 else 'No')
-
-# ContractType değişkeninin oluşturulması
 df['ContractType'] = df['Contract'].apply(lambda x: 'Monthly' if x == 'Month-to-month' else 'Long-term')
-
-# StreamingServicesUsed değişkeninin oluşturulması
 df['StreamingServicesUsed'] = df[['StreamingTV', 'StreamingMovies']].apply(lambda x: 'Yes' if 'Yes' in x.values else 'No', axis=1)
-
-# Yeni değişkenlerin özetini görüntüleme
 print(df[['TotalChargesPerMonth', 'TenureGroup', 'NumberOfServicesUsed', 'MonthlyChargesPerService', 'SeniorCitizenBinary', 'ContractType', 'StreamingServicesUsed']].head())
 df.head()
 def one_hot_encoder(dataframe, categorical_cols, drop_first=False):
